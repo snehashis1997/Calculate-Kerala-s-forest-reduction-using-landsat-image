@@ -8,7 +8,11 @@ import matplotlib.pyplot as plt
 import cv2
 import numpy as np
 import copy
+
+#defining path of 2005(file name:after) images
 after='C:/Users/user/Desktop/forest/india/kerala/after/'
+
+#defining path of 1990(file name:before) images
 before='C:/Users/user/Desktop/forest/india/kerala/before/'
 
 bef=[]
@@ -60,29 +64,17 @@ cv2.imwrite("1990" +".tif",before_final)
 
 fi=np.hstack((before_final,after_final))
 
-
-d=0
+#calculating the decrement in forest area
 q=0
 for i in range(len(after_final)):
     for j in range(len(after_final[i])):
         if np.sum(after_final[i][j]<=669) or np.sum(after_final[i][j]>=667):
-            d+=1
             if (np.sum(before_final[i][j]<=195) or np.sum(before_final[i][j]>=192)):
                 q=q+1
-                
+                    
+#calculate the area.multiply with 900 because the landsat image resolution is 30 mtrs               
 area=q*900
 print('total forest destroy area: ',area,'square meters' )
       
 plt.imshow(fi),plt.title(str(area)+' sq mtrs forest reduction')
 plt.show()
-
-
-
-    
-                    
-                    
-
-
-            
-    
-
